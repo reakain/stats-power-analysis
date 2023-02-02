@@ -2,10 +2,13 @@
 import numpy as np
 from tabulate import tabulate
 import time
+import mmap
 
 measuref = "measurement_data_2023_uint8.bin"
-data = np.fromfile(measuref, dtype='uint8')
-print(data.shape)
+#data = np.fromfile(measuref, dtype='uint8')
+#print(data.shape)
+#mm = mmap.mmap(measuref, 0)
+# mm[:5]
 means = ["Mean"]
 variances = ["Variance"]
 tdiffs = ["Time"]
