@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import numpy as np
 from tabulate import tabulate
+import time
 
 measuref = "measurement_data_2023_uint8.bin"
 data = np.fromfile(measuref, dtype='uint8')
@@ -20,7 +21,7 @@ runall = False
 if runa or runall:
     print("a) Naive Approach")
     starta = time.time()
-
+    
 
 
     means.append(0)
