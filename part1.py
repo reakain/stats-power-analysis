@@ -3,6 +3,7 @@ import numpy as np
 from tabulate import tabulate
 import time
 import mmap
+import math
 
 measuref = "measurement_data_2023_uint8.bin"
 length_grab = 100000
@@ -19,6 +20,8 @@ rund = False
 runall = False
 
 vals = None
+
+print("Task 1:")
 
 # with open(measuref, "r+b") as f:
 #     # memory-map the file, size 0 means whole file
@@ -64,7 +67,7 @@ if runa or runall:
         variance = (sumsquare - mean*summ)/mm.size()
         mm.close()
     means.append(mean)
-    variances.append(variance)
+    variances.append(math.sqrt(variance))
     tdiffs.append(time.time()-starta)
 
 if runb or runall:
@@ -97,7 +100,7 @@ if runb or runall:
             variance = M2/i
         mm.close()
     means.append(mean)
-    variances.append(variance)
+    variances.append(math.sqrt(variance))
     tdiffs.append(time.time()-startb)
 
 if runc or runall:
@@ -114,16 +117,13 @@ if runc or runall:
         vals = np.array(list(mm[:]))
 
     means.append(0)
-    variances.append(0)
+    variances.append(math.sqrt(variance))
     tdiffs.append(time.time()-startc)
 
 if rund or runall:
     print("d) Histogram")
     startd = time.time()
     # TODO: check if bincount is acceptable
-    # hist = np.zeros(256)
-    # for i in range(256):
-    #     hist[i] = np.sum(np.where(vals == i, 1, 0))
     vals = None
     with open(measuref, "r+b") as f:
         mm = mmap.mmap(f.fileno(), 0)
@@ -137,7 +137,7 @@ if rund or runall:
     meansum = mean*histsum
     variance = (squaresum-meansum)/(counts)
     means.append(mean)
-    variances.append(variance)
+    variances.append(math.sqrt(variance))
     tdiffs.append(time.time()-startd)
 
 
